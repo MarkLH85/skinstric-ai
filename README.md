@@ -45,8 +45,9 @@ Target deployment platform: Vercel.
 
 ## Submission
 
-Live URL: TO BE ADDED
+Live URL: https://skinstric-ai-orcin.vercel.app
 
-GitHub URL: TO BE ADDED
+GitHub URL: https://github.com/MarkLH85/skinstric-ai
 
 Figma comparison: requires the Figma design/reference supplied for the project.
+
