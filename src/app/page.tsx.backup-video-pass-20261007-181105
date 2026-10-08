@@ -1,6 +1,4 @@
 'use client';
-import { LuDiamond } from 'react-icons/lu';
-import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
@@ -320,113 +318,38 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-white text-zinc-900'>
       {!started ? (
-        <main className='relative flex min-h-screen flex-col overflow-hidden bg-white text-black'>
-          <header className='relative z-30 flex items-start justify-between px-7 py-6 sm:px-8 md:px-10'>
-            <button
-  type='button'
-  onClick={() => setStarted(true)}
-  className='text-left text-[8px] font-bold leading-none tracking-normal sm:text-[8px] md:text-[9px]'
->
-  SKINSTRIC
-  <span className='ml-2 font-medium text-zinc-400'>[ INTRO ]</span>
-</button>
-
-            <button
-              type='button'
-              className='bg-black px-3 py-2 text-[8px] font-semibold tracking-[0.1em] text-white sm:px-4 sm:py-2.5 sm:text-[9px]'
-            >
-              ENTER CODE
+        <section className='relative flex min-h-screen flex-col overflow-hidden px-5 py-6 sm:px-8 md:px-12'>
+          <header className='flex items-start justify-between'>
+            <button onClick={() => setStarted(false)} className='text-left text-[10px] font-semibold tracking-[0.18em] sm:text-xs'>
+              <span>SKINSTRIC</span>
+              <span className='ml-3 text-zinc-400'>[ INTRO ]</span>
             </button>
+            <button className='bg-black px-3 py-2 text-[9px] font-semibold tracking-[0.1em] text-white sm:px-4'>ENTER CODE</button>
           </header>
 
-          <section className='relative flex-1 overflow-hidden'>
-            <div className='pointer-events-none absolute inset-0'>
-
-                                <svg
-                  className='pointer-events-none fixed left-0 top-[12vh] h-[80vh] w-[18.5vw] max-w-none'
-                  viewBox='0 0 350 700'
-                  preserveAspectRatio='none'
-                  aria-hidden='true'
-                >
-                  <path
-                    d='M 0 0 L 350 350 L 0 700'
-                    fill='none'
-                    stroke='rgb(212 212 216)'
-                    strokeWidth='1'
-                  />
-                </svg>
-
-                <svg
-                  className='pointer-events-none fixed right-0 top-[12vh] h-[80vh] w-[18.5vw] max-w-none'
-                  viewBox='0 0 350 700'
-                  preserveAspectRatio='none'
-                  aria-hidden='true'
-                >
-                  <path
-                    d='M 350 0 L 0 350 L 350 700'
-                    fill='none'
-                    stroke='rgb(212 212 216)'
-                    strokeWidth='1'
-                  />
-                </svg>            </div>
-
-            <div className='absolute left-1/2 top-[26%] z-10 flex w-full -translate-x-1/2 items-center justify-center'>
-              <button
-                type='button'
-                onClick={() => setStarted(true)}
-                className='group absolute left-[5%] top-1/2 hidden -translate-y-1/2 items-center gap-2 text-[8px] font-medium tracking-[0.12em] text-zinc-500 transition hover:text-black sm:flex md:left-[5.5%]'
-              >
-                <span className='relative grid h-7 w-7 place-items-center'>
-                  <LuDiamond className='absolute h-7 w-7 stroke-[1]' />
-                  <FaCaretLeft className='relative h-2 w-2' />
-                </span>
-                DISCOVER AI
-              </button>
-
-              <h1 className='text-center text-[88px] font-light leading-[0.88] tracking-[-0.065em] sm:text-[92px] md:text-[96px]'>
-                Sophisticated
-                <br />
-                skincare
-              </h1>
-
-              <button
-                type='button'
-                onClick={() => setStarted(true)}
-                className='group absolute right-[5%] top-1/2 hidden -translate-y-1/2 items-center gap-2 text-[8px] font-medium tracking-[0.12em] text-zinc-500 transition hover:text-black sm:flex md:right-[5.5%]'
-              >
-                TAKE TEST
-                <span className='relative grid h-7 w-7 place-items-center'>
-                  <LuDiamond className='absolute h-7 w-7 stroke-[1]' />
-                  <FaCaretRight className='relative h-2 w-2' />
-                </span>
-              </button>
-            </div>
-
+          <div className='flex flex-1 items-center justify-center'>
             <button
-              type='button'
               onClick={() => setStarted(true)}
-              className='absolute bottom-16 left-1/2 z-20 -translate-x-1/2 text-[9px] font-semibold tracking-[0.18em] sm:hidden'
+              className='group relative flex h-[min(78vw,560px)] w-[min(78vw,560px)] max-w-full items-center justify-center'
+              aria-label='Introduce Yourself and start analysis'
             >
-              TAKE TEST
+              <span className='absolute h-[62%] w-[62%] rotate-12 border border-dotted border-zinc-200 transition-transform duration-700 group-hover:rotate-45' />
+              <span className='absolute h-[68%] w-[52%] -rotate-12 border border-dotted border-zinc-200 transition-transform duration-700 group-hover:-rotate-45' />
+              <span className='absolute h-[52%] w-[72%] rotate-45 border border-dotted border-zinc-200 transition-transform duration-700 group-hover:rotate-90' />
+              <span className='relative z-10 block px-4'>
+                <span className='block text-[9px] font-medium tracking-[0.2em] text-zinc-500 sm:text-xs'>CLICK TO TYPE</span>
+                <span className='mt-2 block border-b border-zinc-500 pb-1 text-4xl font-light tracking-tight sm:text-5xl md:text-6xl'>Introduce Yourself</span>
+              </span>
             </button>
-          </section>
+          </div>
 
-          <footer className='relative z-30 flex items-end justify-between px-7 pb-12 text-[7px] leading-[1.35] tracking-[0.06em] text-zinc-400 sm:px-8 md:px-10'>
-            <p className='max-w-[235px]'>
-              SKINSTRIC DEVELOPED AN AI THAT CREATES A
-              <br />
-              HIGHLY-PERSONALIZED ROUTINE TAILORED TO
-              <br />
-              WHAT YOUR SKIN NEEDS.
-            </p>
-
-            <p className='hidden max-w-[220px] text-right sm:block'>
-              DISCOVER YOUR SKIN THROUGH INTELLIGENT
-              <br />
-              ANALYSIS.
-            </p>
-          </footer>
-        </main>
+          <button onClick={() => setStarted(false)} className='flex items-center gap-3 text-xs font-semibold tracking-[0.12em]'>
+            <span className='grid h-10 w-10 place-items-center rotate-45 border border-zinc-400'>
+              <FiArrowLeft className='-rotate-45' />
+            </span>
+            BACK
+          </button>
+        </section>
       ) : (
         <>
           <header className='flex items-start justify-between px-5 py-6 sm:px-8 md:px-10'>
@@ -473,15 +396,15 @@ export default function Home() {
                   <p className='mt-6 text-base text-zinc-500'>Upload an image so Skinstric AI can analyze your demographics.</p>
                 </div>
 
-                <div className='mx-auto mt-16 grid max-w-4xl gap-6 sm:grid-cols-2'>
-                  <label className='flex min-h-56 cursor-pointer flex-col items-center justify-center border border-zinc-200 bg-transparent p-8 text-center transition hover:border-zinc-900'>
+                <div className='mx-auto mt-14 grid max-w-3xl gap-5 sm:grid-cols-2'>
+                  <label className='flex min-h-64 cursor-pointer flex-col items-center justify-center border border-dashed border-zinc-300 p-10 text-center transition hover:border-zinc-900'>
                     <FiImage className='mb-5 text-3xl' />
                     <span className='text-sm font-semibold tracking-[0.18em]'>UPLOAD IMAGE</span>
                     <span className='mt-3 text-sm text-zinc-500'>JPG, PNG, or another supported image format</span>
                     <input type='file' accept='image/*' onChange={handleImageFile} className='sr-only' disabled={loading} />
                   </label>
 
-                  <button onClick={() => { setError(''); setPhase(3); }} disabled={loading} className='flex min-h-56 flex-col items-center justify-center border border-zinc-200 bg-transparent p-8 text-center transition hover:border-black hover:bg-zinc-50 disabled:cursor-not-allowed'>
+                  <button onClick={() => { setError(''); setPhase(3); }} disabled={loading} className='flex min-h-64 flex-col items-center justify-center border border-zinc-300 p-10 text-center transition hover:border-black hover:bg-zinc-50 disabled:cursor-not-allowed'>
                     <FiCamera className='mb-5 text-3xl' />
                     <span className='text-sm font-semibold tracking-[0.18em]'>TAKE A PICTURE</span>
                     <span className='mt-3 text-sm text-zinc-500'>Open your camera and take a selfie</span>
@@ -507,9 +430,9 @@ export default function Home() {
                   <video ref={videoRef} autoPlay muted playsInline className='aspect-video h-auto w-full object-cover' aria-label='Camera preview' />
                 </div>
 
-                <div className='mx-auto mt-7 grid max-w-3xl gap-4 sm:grid-cols-2'>
-                  <button onClick={captureSelfie} disabled={!cameraReady || loading} className='flex items-center justify-center gap-3 bg-black px-6 py-4 text-xs tracking-[0.18em] text-white disabled:cursor-not-allowed disabled:bg-zinc-300'><FiCamera /> {loading ? 'ANALYZING...' : 'TAKE PICTURE'}</button>
-                  <button onClick={stopCamera} disabled={!cameraActive} className='flex items-center justify-center gap-3 border border-zinc-300 px-6 py-4 text-xs tracking-[0.18em] disabled:cursor-not-allowed disabled:text-zinc-300'><FiX /> STOP CAMERA</button>
+                <div className='mx-auto mt-6 grid max-w-3xl gap-3 sm:grid-cols-2'>
+                  <button onClick={captureSelfie} disabled={!cameraReady || loading} className='flex items-center justify-center gap-3 bg-black px-6 py-5 text-sm tracking-[0.15em] text-white disabled:cursor-not-allowed disabled:bg-zinc-300'><FiCamera /> {loading ? 'ANALYZING...' : 'TAKE PICTURE'}</button>
+                  <button onClick={stopCamera} disabled={!cameraActive} className='flex items-center justify-center gap-3 border border-zinc-300 px-6 py-5 text-sm tracking-[0.15em] disabled:cursor-not-allowed disabled:text-zinc-300'><FiX /> STOP CAMERA</button>
                 </div>
 
                 {error && <p className='mt-6 text-center text-sm text-red-600'>{error}</p>}
@@ -530,7 +453,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className='grid gap-8 lg:grid-cols-[150px_minmax(0,1fr)_260px]'>
+                <div className='grid gap-6 lg:grid-cols-[160px_minmax(0,1fr)_280px]'>
                   <aside className='order-2 lg:order-1'>
                     <div className='mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500'>
                       SELECT ATTRIBUTE
@@ -552,7 +475,7 @@ export default function Home() {
                               {categoryLabel(category)}
                             </div>
                             <div className='mt-2 text-lg font-light'>
-                              {top ? formatLabel(top[0]) : 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â'}
+                              {top ? formatLabel(top[0]) : 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â'}
                             </div>
                           </button>
                         );
@@ -584,7 +507,7 @@ export default function Home() {
                   <section className='order-1 border border-zinc-200 bg-zinc-50 lg:order-2'>
                     {(() => {
                       const ranked = sortScores(demographics[selectedCategory]);
-                      const [topValue, topScore] = ranked[0] || ['ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â', 0];
+                      const [topValue, topScore] = ranked[0] || ['ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â', 0];
                       const confidence = Math.max(0, Math.min(100, topScore * 100));
                       const rotation = Math.round(topScore * 360);
 

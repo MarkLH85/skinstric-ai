@@ -1,0 +1,1197 @@
+============================================================
+SKINSTRIC AI - FULL CODE AUDIT
+============================================================
+
+PROJECT PATH
+------------
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification
+
+AUDIT TIME
+----------
+2026-10-04 15:36:50
+
+============================================================
+1. PROJECT FILE INVENTORY
+============================================================
+.gitignore                                                                    480 bytes
+AGENTS.md                                                                     678 bytes
+backup-phase-1\page.tsx                                                      9566 bytes
+CLAUDE.md                                                                      11 bytes
+eslint.config.mjs                                                             465 bytes
+Lesson Notes.md                                                              1620 bytes
+next.config.ts                                                                133 bytes
+next-env.d.ts                                                                 288 bytes
+package.json                                                                  568 bytes
+package-lock.json                                                          237093 bytes
+postcss.config.mjs                                                             94 bytes
+PROJECT CHECKLIST.md                                                         1703 bytes
+PROJECT STATUS.md                                                             766 bytes
+public\file.svg                                                               391 bytes
+public\globe.svg                                                             1035 bytes
+public\next.svg                                                              1375 bytes
+public\vercel.svg                                                             128 bytes
+public\window.svg                                                             385 bytes
+README.md                                                                    1147 bytes
+src\app\api\phase-one\route.ts                                               1261 bytes
+src\app\api\phase-two\route.ts                                               1303 bytes
+src\app\favicon.ico                                                         25931 bytes
+src\app\globals.css                                                           339 bytes
+src\app\layout.tsx                                                            390 bytes
+src\app\page.tsx                                                            17522 bytes
+tsconfig.json                                                                 670 bytes
+What I Learned.md                                                            1037 bytes
+YOUR_EXISTING_FILE_PATH                                                         3 bytes
+
+============================================================
+2. PACKAGE.JSON
+============================================================
+{
+  "name": "skinstric-ai-temp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-icons": "^5.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+============================================================
+3. NEXT CONFIGURATION
+============================================================
+
+----- next.config.ts -----
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+----- tsconfig.json -----
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+
+----- postcss.config.mjs -----
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+
+============================================================
+4. COMPLETE APPLICATION SOURCE
+============================================================
+
+################################################################
+FILE: src\app\api\phase-one\route.ts
+################################################################
+import { NextResponse } from "next/server";
+
+const SKINSTRIC_PHASE_ONE_API = "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne";
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const location = typeof body.location === "string" ? body.location.trim() : "";
+
+    if (!name || !location) {
+      return NextResponse.json({ error: "Name and location are required." }, { status: 400 });
+    }
+
+    const response = await fetch(SKINSTRIC_PHASE_ONE_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, location }),
+      cache: "no-store",
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data?.error || data?.message || "Skinstric API request failed." },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Phase 1 API error:", error);
+    return NextResponse.json(
+      { error: "Unable to connect to the Skinstric API." },
+      { status: 500 }
+    );
+  }
+}
+
+################################################################
+FILE: src\app\api\phase-two\route.ts
+################################################################
+import { NextResponse } from "next/server";
+
+const SKINSTRIC_PHASE_TWO_API =
+  "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo";
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const image = typeof body.Image === "string" ? body.Image.trim() : "";
+
+    if (!image) {
+      return NextResponse.json(
+        { error: "A Base64 image is required." },
+        { status: 400 }
+      );
+    }
+
+    const response = await fetch(SKINSTRIC_PHASE_TWO_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Image: image,
+      }),
+      cache: "no-store",
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json(
+        {
+          error:
+            data?.error ||
+            data?.message ||
+            "Skinstric Phase 2 API request failed.",
+        },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Phase 2 API error:", error);
+
+    return NextResponse.json(
+      { error: "Unable to connect to the Skinstric Phase 2 API." },
+      { status: 500 }
+    );
+  }
+}
+
+################################################################
+FILE: src\app\globals.css
+################################################################
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f7f7f5;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+################################################################
+FILE: src\app\layout.tsx
+################################################################
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Skinstric AI",
+  description: "Skinstric AI project for Frontend Simplified.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+
+################################################################
+FILE: src\app\page.tsx
+################################################################
+'use client';
+
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { FiArrowLeft, FiCamera, FiImage, FiMapPin, FiUser, FiX } from 'react-icons/fi';
+
+type Demographics = Record<string, Record<string, number>>;
+
+const CATEGORY_ORDER = ['race', 'age', 'gender'];
+
+function validateText(value: string) {
+  return value.trim().length > 0 && !/\d/.test(value);
+}
+
+function sortScores(values: Record<string, number>) {
+  return Object.entries(values).sort((a, b) => b[1] - a[1]);
+}
+
+function formatLabel(value: string) {
+  return value
+    .replace(/-/g, 'ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+export default function Home() {
+  const [phase, setPhase] = useState(1);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [demographics, setDemographics] = useState<Demographics | null>(null);
+  const [actualSelections, setActualSelections] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [cameraActive, setCameraActive] = useState(false);
+  const [cameraReady, setCameraReady] = useState(false);
+  const [preview, setPreview] = useState('');
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const savedName = localStorage.getItem('skinstric-name');
+    const savedLocation = localStorage.getItem('skinstric-location');
+
+    if (savedName) setName(savedName);
+    if (savedLocation) setLocation(savedLocation);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+    };
+  }, []);
+
+  const stopCamera = () => {
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.srcObject = null;
+    }
+
+    setCameraActive(false);
+    setCameraReady(false);
+  };
+
+  const startCamera = async () => {
+    setError('');
+    setCameraReady(false);
+
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setError('Camera access is not available in this browser. Please use Upload Instead.');
+      return;
+    }
+
+    try {
+      stopCamera();
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        },
+        audio: false
+      });
+
+      streamRef.current = stream;
+      setCameraActive(true);
+
+      const video = videoRef.current;
+
+      if (!video) {
+        stream.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
+        setCameraActive(false);
+        setError('Camera preview could not be initialized.');
+        return;
+      }
+
+      video.srcObject = stream;
+      video.muted = true;
+      video.playsInline = true;
+      video.autoplay = true;
+
+      const playVideo = async () => {
+        try {
+          await video.play();
+          setCameraReady(true);
+        } catch {
+          setError('The camera opened, but the browser could not start the video preview.');
+        }
+      };
+
+      if (video.readyState >= 2) {
+        await playVideo();
+      } else {
+        video.onloadedmetadata = () => {
+          void playVideo();
+        };
+      }
+    } catch (cameraError) {
+      stopCamera();
+
+      if (cameraError instanceof DOMException) {
+        if (cameraError.name === 'NotAllowedError') {
+          setError('Camera permission was denied. Allow camera access for localhost, then try again.');
+          return;
+        }
+
+        if (cameraError.name === 'NotFoundError') {
+          setError('No camera was found. Please connect a camera or use Upload Instead.');
+          return;
+        }
+      }
+
+      setError('Unable to access the camera. Please use Upload Instead.');
+    }
+  };
+
+  const analyzeBase64 = async (base64: string) => {
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/phase-two', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Image: base64 })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Skinstric image analysis failed.');
+      }
+
+      if (!result.data) {
+        throw new Error('Skinstric returned no demographic data.');
+      }
+
+      setDemographics(result.data);
+      setActualSelections({});
+      setPhase(2);
+    } catch (analysisError) {
+      setError(analysisError instanceof Error ? analysisError.message : 'Image analysis failed.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePhaseOne = async () => {
+    if (!validateText(name) || !validateText(location)) {
+      setError('Name and location are required and cannot contain numbers.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/phase-one', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), location: location.trim() })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to save your information.');
+      }
+
+      localStorage.setItem('skinstric-name', name.trim());
+      localStorage.setItem('skinstric-location', location.trim());
+      setPhase(2);
+    } catch (phaseOneError) {
+      setError(phaseOneError instanceof Error ? phaseOneError.message : 'Unable to continue.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setError('Please select an image file.');
+      return;
+    }
+
+    setError('');
+
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      const result = String(reader.result || '');
+      const base64 = result.includes(',') ? result.split(',')[1] : result;
+
+      setPreview(result);
+      await analyzeBase64(base64);
+    };
+
+    reader.onerror = () => setError('Unable to read the selected image.');
+    reader.readAsDataURL(file);
+  };
+
+  const captureSelfie = async () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    if (!video || !canvas || !cameraReady) {
+      setError('Wait for the camera preview to become ready.');
+      return;
+    }
+
+    const width = video.videoWidth;
+    const height = video.videoHeight;
+
+    if (!width || !height) {
+      setError('Camera video is not ready yet. Please wait a moment and try again.');
+      return;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const context = canvas.getContext('2d');
+
+    if (!context) {
+      setError('Unable to capture the camera image.');
+      return;
+    }
+
+    context.drawImage(video, 0, 0, width, height);
+
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+    const base64 = dataUrl.split(',')[1];
+
+    setPreview(dataUrl);
+    stopCamera();
+    await analyzeBase64(base64);
+  };
+
+  const selectActual = (category: string, value: string) => {
+    setActualSelections((current) => ({
+      ...current,
+      [category]: value
+    }));
+  };
+
+  const goBack = () => {
+    setError('');
+
+    if (phase === 1) return;
+
+    stopCamera();
+    setPhase(phase === 2 ? 1 : 2);
+  };
+
+  const beginPhaseThree = async () => {
+    setPhase(3);
+    setError('');
+    setPreview('');
+    await startCamera();
+  };
+
+  return (
+    <main className='min-h-screen bg-white text-zinc-900'>
+      <header className='border-b border-zinc-200 px-6 py-6 md:px-10'>
+        <div className='mx-auto flex max-w-7xl items-start justify-between'>
+          <div>
+            <div className='text-sm font-semibold tracking-[0.35em]'>SKINSTRIC</div>
+            <div className='mt-2 text-xs tracking-[0.18em] text-zinc-500'>AI SKIN ANALYSIS</div>
+          </div>
+          <div className='text-right text-xs tracking-[0.2em] text-zinc-500'>
+            <div>FRONTEND SIMPLIFIED</div>
+            <div className='mt-2'>SKINSTRIC AI PROJECT</div>
+          </div>
+        </div>
+      </header>
+
+      <section className='mx-auto max-w-7xl px-6 py-10 md:px-10 md:py-14'>
+        {phase === 1 && (
+          <div className='mx-auto max-w-4xl'>
+            <div className='text-center'>
+              <div className='text-xs tracking-[0.4em] text-zinc-500'>STEP 01</div>
+              <h1 className='mt-5 text-5xl font-light tracking-tight md:text-7xl'>Discover your skin.</h1>
+              <p className='mt-6 text-base text-zinc-500'>Let us begin with a little information about you.</p>
+            </div>
+
+            <div className='mx-auto mt-16 max-w-2xl space-y-10'>
+              <label className='block'>
+                <span className='flex items-center gap-2 text-sm font-semibold tracking-[0.18em]'>
+                  <FiUser /> NAME
+                </span>
+                <input
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  className='mt-5 w-full border-b border-zinc-300 bg-transparent py-3 text-lg outline-none focus:border-zinc-900'
+                  placeholder='Enter your name'
+                  aria-label='Name'
+                />
+              </label>
+
+              <label className='block'>
+                <span className='flex items-center gap-2 text-sm font-semibold tracking-[0.18em]'>
+                  <FiMapPin /> LOCATION
+                </span>
+                <input
+                  value={location}
+                  onChange={(event) => setLocation(event.target.value)}
+                  className='mt-5 w-full border-b border-zinc-300 bg-transparent py-3 text-lg outline-none focus:border-zinc-900'
+                  placeholder='Enter your location'
+                  aria-label='Location'
+                />
+              </label>
+            </div>
+
+            {error && <p className='mx-auto mt-8 max-w-2xl text-sm text-red-600'>{error}</p>}
+
+            <div className='mt-12 flex items-center justify-between'>
+              <button onClick={goBack} className='flex items-center gap-2 text-sm tracking-[0.2em] text-zinc-500'>
+                <FiArrowLeft /> BACK
+              </button>
+              <button
+                onClick={handlePhaseOne}
+                disabled={loading || !validateText(name) || !validateText(location)}
+                className='bg-black px-7 py-4 text-sm tracking-[0.2em] text-white disabled:cursor-not-allowed disabled:bg-zinc-300'
+              >
+                {loading ? 'PROCESSING...' : 'PROCEED ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {phase === 2 && demographics && (
+          <div>
+            <div className='text-center'>
+              <div className='text-xs tracking-[0.4em] text-zinc-500'>STEP 02</div>
+              <h1 className='mt-5 text-5xl font-light tracking-tight md:text-7xl'>Your skin profile.</h1>
+              <p className='mt-6 text-base text-zinc-500'>Review the analysis and select the values that match you.</p>
+            </div>
+
+            <div className='mt-12 grid gap-8 lg:grid-cols-[1fr_280px]'>
+              <div className='space-y-8'>
+                {CATEGORY_ORDER.filter((category) => demographics[category]).map((category) => (
+                  <section key={category} className='border-t border-zinc-200 pt-6'>
+                    <h2 className='text-sm font-semibold tracking-[0.2em]'>{category.toUpperCase()}</h2>
+                    <div className='mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+                      {sortScores(demographics[category]).map(([value, score]) => (
+                        <button
+                          key={value}
+                          onClick={() => selectActual(category, value)}
+                          className={actualSelections[category] === value ? 'border border-black bg-black p-5 text-left text-white transition' : 'border border-zinc-200 p-5 text-left transition hover:border-zinc-900'}
+                        >
+                          <div className='flex items-center justify-between gap-4'>
+                            <span className='text-sm'>{formatLabel(value)}</span>
+                            <span className='font-mono text-sm'>{(score * 100).toFixed(2)}%</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+
+              <aside className='border border-zinc-200 p-6'>
+                <h2 className='text-xs font-semibold tracking-[0.25em]'>ACTUAL</h2>
+                <div className='mt-6 space-y-6'>
+                  {CATEGORY_ORDER.map((category) => (
+                    <div key={category} className='border-b border-zinc-200 pb-4'>
+                      <div className='text-xs uppercase tracking-[0.2em] text-zinc-500'>{category}</div>
+                      <div className='mt-2 text-sm font-medium'>
+                        {actualSelections[category] ? formatLabel(actualSelections[category]) : 'Select above'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </aside>
+            </div>
+
+            {error && <p className='mt-8 text-sm text-red-600'>{error}</p>}
+
+            <div className='mt-12 flex flex-wrap items-center justify-between gap-5'>
+              <button onClick={goBack} className='flex items-center gap-2 text-sm tracking-[0.2em] text-zinc-500'>
+                <FiArrowLeft /> BACK
+              </button>
+              <button
+                onClick={beginPhaseThree}
+                className='bg-black px-7 py-4 text-sm tracking-[0.2em] text-white'
+              >
+                TAKE A SELFIE ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+              </button>
+            </div>
+          </div>
+        )}
+
+        {phase === 3 && (
+          <div>
+            <div className='text-center'>
+              <div className='text-xs tracking-[0.4em] text-zinc-500'>STEP 03</div>
+              <h1 className='mt-5 text-5xl font-light tracking-tight md:text-7xl'>Take a Selfie.</h1>
+              <p className='mt-6 text-base text-zinc-500'>Use your camera or upload another image.</p>
+            </div>
+
+            <div className='mt-10 grid gap-8 lg:grid-cols-[1fr_300px]'>
+              <div className='overflow-hidden bg-black'>
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted
+                  playsInline
+                  className='aspect-video h-auto min-h-[360px] w-full object-cover'
+                  aria-label='Camera preview'
+                />
+              </div>
+
+              <div className='space-y-4'>
+                <button
+                  onClick={captureSelfie}
+                  disabled={!cameraReady || loading}
+                  className='flex w-full items-center justify-center gap-3 bg-black px-6 py-5 text-sm tracking-[0.15em] text-white disabled:cursor-not-allowed disabled:bg-zinc-300'
+                >
+                  <FiCamera /> {loading ? 'ANALYZING...' : 'CAPTURE SELFIE'}
+                </button>
+
+                <button
+                  onClick={stopCamera}
+                  disabled={!cameraActive}
+                  className='flex w-full items-center justify-center gap-3 border border-zinc-300 px-6 py-5 text-sm tracking-[0.15em] disabled:cursor-not-allowed disabled:text-zinc-300'
+                >
+                  <FiX /> STOP CAMERA
+                </button>
+
+                <label className='flex w-full cursor-pointer items-center justify-center gap-3 border border-zinc-300 px-6 py-5 text-sm tracking-[0.15em]'>
+                  <FiImage /> UPLOAD INSTEAD
+                  <input
+                    type='file'
+                    accept='image/*'
+                    onChange={handleImageFile}
+                    className='sr-only'
+                  />
+                </label>
+
+                {preview && (
+                  <div className='border border-zinc-200 p-2'>
+                    <img src={preview} alt='Selected selfie preview' className='w-full' />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {error && <p className='mt-8 text-sm text-red-600'>{error}</p>}
+
+            <canvas ref={canvasRef} className='hidden' />
+
+            <div className='mt-12'>
+              <button onClick={goBack} className='flex items-center gap-2 text-sm tracking-[0.2em] text-zinc-500'>
+                <FiArrowLeft /> BACK
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
+
+============================================================
+5. PROJECT DOCUMENTATION
+============================================================
+
+################################################################
+FILE: AGENTS.md
+################################################################
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes â€” APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` â€” verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
+################################################################
+FILE: CLAUDE.md
+################################################################
+@AGENTS.md
+
+################################################################
+FILE: Lesson Notes.md
+################################################################
+# Skinstric AI â€” Lesson Notes
+
+## Project
+Frontend Simplified X Skinstric.ai
+
+## Project Goal
+Build a Skinstric AI-inspired frontend application according to the supplied technical requirements and the official Figma design once access is provided.
+
+## Technology
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- React Icons
+- Vercel deployment
+
+## Phase 1 â€” Initial Project Setup
+- Capture name and location.
+- Validate both fields.
+- Store user information.
+- Send name and location to the Skinstric Phase 1 API.
+- Provide Back and Proceed navigation.
+
+## Phase 2 â€” Upload Your Image
+- Accept an image upload.
+- Convert the image to Base64.
+- Send the Base64 image to the Skinstric Phase 2 API.
+- Display Race, Age, and Gender predictions.
+- Sort scores from highest to lowest.
+- Display scores to two decimal places.
+- Allow the user to select their actual attribute.
+
+## Phase 3 â€” Take a Selfie
+- Request camera access.
+- Allow the user to take a selfie.
+- Reuse the Phase 2 analysis logic.
+- Support laptop, tablet, and mobile layouts.
+
+## API Endpoints
+- Phase 1: https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne
+- Phase 2: https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo
+
+## Design
+The supplied project specification states that Figma access will be provided during the meeting with Mitri. The implementation will be matched to the official Figma design once that file is available.
+
+## Deployment
+Final project will be deployed to Vercel.
+
+## Submission
+- Live Vercel URL
+- Project/repository URL
+
+################################################################
+FILE: PROJECT CHECKLIST.md
+################################################################
+# Skinstric AI Project Checklist
+
+## Source Specification
+- Official Skinstric project specification reviewed.
+- Phase 1, Phase 2, Phase 3 requirements identified.
+
+## Phase 1 - Initial Project Setup
+- [x] Next.js project
+- [x] Name field
+- [x] Location field
+- [x] Name validation
+- [x] Location validation
+- [x] localStorage persistence
+- [x] Phase 1 API integration
+- [x] Back button
+- [x] Proceed button
+
+## Phase 2 - Upload Your Image
+- [x] Image file upload
+- [x] Base64 conversion
+- [x] Phase 2 API proxy
+- [x] Skinstric Phase 2 API integration
+- [x] Race scores
+- [x] Age scores
+- [x] Gender scores
+- [x] Scores sorted descending
+- [x] Scores displayed to two decimal places
+- [x] Actual attribute selection
+- [x] Actual selections displayed in sidebar
+- [x] Actual selections persisted in localStorage
+- [x] Loading state
+- [x] Error state
+
+## Phase 3 - Take a Selfie
+- [x] Camera access
+- [x] Camera preview
+- [x] Selfie capture
+- [x] Canvas to JPEG Base64 conversion
+- [x] Same Phase 2 API used for selfie
+- [x] Upload alternative
+- [x] Camera cleanup
+- [x] Loading state
+- [x] Error state
+- [x] Responsive layout
+
+## Technical Requirements
+- [x] Next.js
+- [x] TailwindCSS
+- [x] React Icons
+- [x] Responsive implementation
+- [x] API integration
+- [ ] Figma exact visual comparison - requires Figma reference/access
+- [ ] Final production deployment
+- [ ] GitHub repository
+- [ ] Live Vercel URL
+
+## Final QA
+- [ ] Production build
+- [ ] Browser Phase 1 test
+- [ ] Browser Phase 2 real API test
+- [ ] Browser Phase 3 camera test
+- [ ] Mobile/tablet test
+- [ ] Desktop test
+- [ ] Console error check
+- [ ] Final submission links
+
+################################################################
+FILE: PROJECT STATUS.md
+################################################################
+# Skinstric AI Project Status
+
+## Current State
+
+Phase 1 was previously implemented and verified with a successful production build.
+
+Phase 2 and Phase 3 have now been implemented:
+
+- Image upload and Base64 conversion
+- Phase 2 Skinstric API proxy
+- Demographic results
+- Descending score sorting
+- Two-decimal percentage formatting
+- Actual attribute selection
+- Actual selection persistence
+- Webcam access
+- Selfie capture
+- Selfie Base64 processing
+- Responsive Phase 2 and Phase 3 interfaces
+- Loading and error states
+
+## Remaining
+
+- Browser test against the live Skinstric Phase 2 API
+- Camera test on a real device/browser
+- Final visual comparison against Figma
+- GitHub repository
+- Vercel deployment
+- Final submission URLs
+
+################################################################
+FILE: README.md
+################################################################
+# Skinstric AI
+
+Frontend Simplified Skinstric AI project built with Next.js, TypeScript, TailwindCSS, and React Icons.
+
+## Features
+- Phase 1 user information collection
+- Name and location validation
+- localStorage persistence
+- Skinstric Phase 1 API integration
+- Phase 2 image upload
+- Base64 image processing
+- Skinstric Phase 2 API integration
+- Demographic probability results
+- Descending probability sorting
+- Two-decimal percentage display
+- Actual demographic selection
+- Phase 3 webcam selfie capture
+- Mobile and tablet responsive layout
+- Upload alternative for Phase 3
+
+## Development
+
+```text
+npm install
+npm run dev
+```
+
+Production build:
+
+```text
+npm run build
+```
+
+## API
+
+Phase 1 is proxied through `/api/phase-one`.
+
+Phase 2 is proxied through `/api/phase-two`.
+
+The Phase 2 endpoint is used for both uploaded images and selfie captures as required by the project specification.
+
+## Deployment
+
+Target deployment platform: Vercel.
+
+## Submission
+
+Live URL: TO BE ADDED
+
+GitHub URL: TO BE ADDED
+
+Figma comparison: requires the Figma design/reference supplied for the project.
+
+################################################################
+FILE: What I Learned.md
+################################################################
+# Skinstric AI â€” What I Learned
+
+## Project Architecture
+I am building a complete frontend application rather than a tutorial exercise.
+
+## Technologies
+I am using Next.js, React, TypeScript, Tailwind CSS, and React Icons.
+
+## API Integration
+The project requires communicating with two supplied backend endpoints.
+
+## Phase 1
+I will collect and validate name and location information before allowing the user to proceed.
+
+## Phase 2
+I will convert an uploaded image into Base64, send it to the supplied API, and present the returned demographic scores.
+
+## Phase 3
+I will use the device camera to capture a selfie and reuse the image-analysis workflow.
+
+## Deployment
+The completed application will be deployed to Vercel and submitted with both a live URL and project/repository URL.
+
+## Design Process
+The official Figma design is required for accurate visual implementation. Until Figma access is available, the project structure and functionality can be prepared without inventing the final visual design.
+
+============================================================
+6. AUTOMATED CODE SCANS
+============================================================
+
+----- eval() usage -----
+[NONE FOUND]
+
+----- new Function() usage -----
+[NONE FOUND]
+
+----- unsafe-eval -----
+[NONE FOUND]
+
+----- TODO markers -----
+[NONE FOUND]
+
+----- FIXME markers -----
+[NONE FOUND]
+
+----- console.error -----
+src\app\api\phase-one\route.ts:33: console.error("Phase 1 API error:", error);
+src\app\api\phase-two\route.ts:45: console.error("Phase 2 API error:", error);
+
+----- console.log -----
+[NONE FOUND]
+
+----- dangerouslySetInnerHTML -----
+[NONE FOUND]
+
+----- hardcoded localhost -----
+[NONE FOUND]
+
+----- hardcoded API URL -----
+src\app\api\phase-one\route.ts:3: const SKINSTRIC_PHASE_ONE_API = "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne";
+src\app\api\phase-two\route.ts:4: "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo";
+
+============================================================
+7. EXPECTED SKINSTRIC FILES
+============================================================
+[PASS] package.json
+[PASS] src\app\page.tsx
+[PASS] src\app\layout.tsx
+[PASS] src\app\globals.css
+[PASS] src\app\api\phase-one\route.ts
+[PASS] src\app\api\phase-two\route.ts
+[PASS] Lesson Notes.md
+[PASS] What I Learned.md
+[PASS] README.md
+
+============================================================
+8. TYPESCRIPT CHECK
+============================================================
+
+TypeScript exit code: 0
+
+============================================================
+9. LINT CHECK
+============================================================
+
+> skinstric-ai-temp@0.1.0 lint
+> eslint
+
+
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx
+  37:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx:37:7
+  35 |     try {
+  36 |       const user = JSON.parse(saved) as UserInformation;
+> 37 |       setName(user.name || "");
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  38 |       setLocation(user.location || "");
+  39 |     } catch {
+  40 |       window.localStorage.removeItem(STORAGE_KEY);  react-hooks/set-state-in-effect
+
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\page.tsx
+   44:20  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\page.tsx:44:20
+  42 |     const savedLocation = localStorage.getItem('skinstric-location');
+  43 |
+> 44 |     if (savedName) setName(savedName);
+     |                    ^^^^^^^ Avoid calling setState() directly within an effect
+  45 |     if (savedLocation) setLocation(savedLocation);
+  46 |   }, []);
+  47 |  react-hooks/set-state-in-effect
+  470:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @next/next/no-img-element
+
+Γ£û 3 problems (2 errors, 1 warning)
+
+
+Lint exit code: 1
+
+============================================================
+10. PRODUCTION BUILD
+============================================================
+
+> skinstric-ai-temp@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.3.8 (Turbopack)
+Γ£ô Running next.config.ts took 39ms
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 624ms
+  Running TypeScript ...
+  Finished TypeScript in 1418ms ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/6) ...
+  Generating static pages using 7 workers (1/6) 
+  Generating static pages using 7 workers (2/6) 
+  Generating static pages using 7 workers (4/6) 
+Γ£ô Generating static pages using 7 workers (6/6) in 610ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /api/phase-one
+Γöö ╞Æ /api/phase-two
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
+
+Build exit code: 0
+
+============================================================
+11. FINAL AUDIT STATUS
+============================================================
+[PASS] TypeScript
+[FAIL] Lint
+[PASS] Production build
+
+============================================================
+END OF AUDIT
+============================================================

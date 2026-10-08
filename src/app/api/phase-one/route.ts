@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const name = typeof body.name === "string" ? body.name.trim() : "";
     const location = typeof body.location === "string" ? body.location.trim() : "";
 
-    if (!name || !location) {
+    if (!name || !location || /\d/.test(name) || /\d/.test(location)) {
       return NextResponse.json({ error: "Name and location are required." }, { status: 400 });
     }
 
@@ -37,3 +37,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

@@ -1,7 +1,25 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const SKINSTRIC_PHASE_TWO_API =
   "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo";
+
+function isValidBase64(value: string) {
+  if (!value || value.length % 4 !== 0) {
+    return false;
+  }
+
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(value)) {
+    return false;
+  }
+
+  try {
+    const decoded = Buffer.from(value, "base64");
+
+    return decoded.length > 0;
+  } catch {
+    return false;
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -11,6 +29,13 @@ export async function POST(request: Request) {
     if (!image) {
       return NextResponse.json(
         { error: "A Base64 image is required." },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidBase64(image)) {
+      return NextResponse.json(
+        { error: "Image must be a valid Base64 string." },
         { status: 400 }
       );
     }
@@ -50,4 +75,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

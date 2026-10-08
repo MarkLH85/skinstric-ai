@@ -1,0 +1,29 @@
+﻿SKINSTRIC AI PROJECT AUDIT
+Generated: 10/04/2026 15:55:51
+Project: C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification
+
+=== FILE INVENTORY ===
+next-env.d.ts
+next.config.ts
+package-lock.json
+package.json
+tsconfig.json
+backup-phase-1\page.tsx
+src\app\globals.css
+src\app\layout.tsx
+src\app\page.tsx
+src\app\api\phase-one\route.ts
+src\app\api\phase-two\route.ts
+
+=== API REFERENCES ===
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\api\phase-one\route.ts:3: const SKINSTRIC_PHASE_ONE_API = "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne";
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\api\phase-two\route.ts:4: "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo";
+
+=== TODO / UNFINISHED ===
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\package-lock.json:6888: "url": "https://github.com/sponsors/colinhacks"
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx:145: placeholder="Enter your name"
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx:146: className="w-full border-b border-black/25 bg-transparent px-1 py-4 text-lg outline-none transition placeholder:text-black/25 focus:border-black"
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx:170: placeholder="Enter your city"
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\backup-phase-1\page.tsx:171: className="w-full border-b border-black/25 bg-transparent px-1 py-4 text-lg outline-none transition placeholder:text-black/25 focus:border-black"
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\page.tsx:323: placeholder='Enter your name'
+C:\Users\MHerr\Desktop\Frontend Work\WebDev\Module-13-Skinstric-AI\01 - Skinstric AI\01 - Skinstric AI Specification\src\app\page.tsx:336: placeholder='Enter your location'
