@@ -51,9 +51,17 @@ export function DemographicResults({
       className="relative min-h-screen overflow-hidden bg-[#fcfcfc] text-[#1a1b1c]"
     >
       <header className="absolute inset-x-0 top-0 z-10 flex h-[3.333vw] items-center px-[1.667vw]">
-        <div className="flex items-center gap-[1vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-[1.14] tracking-[-0.02em]">
-          <span>Skinstric</span>
-          <span className="opacity-60">[ Analysis ]</span>
+        <div className="flex items-center gap-3 text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-[1.14] tracking-[-0.02em]">
+          <span>SKINSTRIC</span>
+          <span className="flex items-center gap-[6px] opacity-60">
+            <svg aria-hidden="true" className="h-[17px] w-[4px]" viewBox="0 0 4 17" fill="none">
+              <path d="M3.5 0.5H0.5V16.5H3.5" stroke="currentColor" />
+            </svg>
+            <span>Analysis</span>
+            <svg aria-hidden="true" className="h-[17px] w-[4px]" viewBox="0 0 4 17" fill="none">
+              <path d="M0.5 0.5H3.5V16.5H0.5" stroke="currentColor" />
+            </svg>
+          </span>
         </div>
       </header>
 

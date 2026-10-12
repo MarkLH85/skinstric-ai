@@ -111,9 +111,9 @@ export function CameraCapture({
             : undefined
         }
         aria-hidden={screen !== "cameraLive" && screen !== "cameraCountdown"}
-        className={`fixed z-0 bg-[#cdcecc] object-cover ${
+        className={`fixed inset-0 z-0 h-full w-full bg-[#cdcecc] object-cover ${
           screen === "cameraLive" || screen === "cameraCountdown"
-            ? "left-[15.72vw] top-[3.75vh] h-[96.25vh] w-[64.17vw] opacity-100"
+            ? "opacity-100"
             : "pointer-events-none -left-[2px] -top-[2px] h-px w-px opacity-0"
         }`}
       />
@@ -123,9 +123,9 @@ export function CameraCapture({
           src={preview}
           alt="Captured image preview"
           unoptimized
-          width={1232}
-          height={924}
-          className="fixed left-[15.72vw] top-[3.75vh] z-0 h-[96.25vh] w-[64.17vw] object-cover"
+          width={1920}
+          height={960}
+          className="fixed inset-0 z-0 h-full w-full object-cover"
         />
       )}
 
@@ -139,7 +139,11 @@ export function CameraCapture({
               <svg aria-hidden="true" className="h-[17px] w-[4px]" viewBox="0 0 4 17" fill="none">
                 <path d="M3.5 0.5H0.5V16.5H3.5" stroke="currentColor" />
               </svg>
-              <span>Analysis</span>
+              {screen === "captureReview" ? (
+                <span>Analysis</span>
+              ) : (
+                <span className="inline-block w-[12px]" />
+              )}
               <svg aria-hidden="true" className="h-[17px] w-[4px]" viewBox="0 0 4 17" fill="none">
                 <path d="M0.5 0.5H3.5V16.5H0.5" stroke="currentColor" />
               </svg>
@@ -275,7 +279,7 @@ export function CameraCapture({
           <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc]">
             To get better results make sure to have
           </p>
-          <Guidance className="top-[93.125vh] text-[#fcfcfc]" />
+          <Guidance className="top-[93.125vh] text-[#fcfcfc]" screen={screen} />
           <div className="absolute inset-x-[1.667vw] bottom-[3.75vh] z-20 flex items-end justify-between gap-[1vw]">
             <button
               type="button"
@@ -299,7 +303,7 @@ export function CameraCapture({
               className="absolute right-[1.667vw] top-[46.77vh] z-20 flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Take picture
-              <span className="grid size-[clamp(32px,3.23vw,62px)] place-items-center rounded-full border border-white">
+              <span className="grid size-[clamp(32px,3.23vw,62px)] place-items-center rounded-full bg-[#fcfcfc] text-[#1a1b1c] shadow-sm">
                 <FiCamera className="size-[clamp(16px,1.4vw,27px)]" aria-hidden="true" />
               </span>
             </button>
@@ -309,13 +313,17 @@ export function CameraCapture({
 
       {screen === "captureReview" && (
         <>
-          <p className="sr-only" aria-live="polite">
+          <p
+            className="absolute left-1/2 top-[26.46vh] z-20 -translate-x-1/2 text-center text-[clamp(10px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc]"
+            role="status"
+            aria-live="polite"
+          >
             {source === "camera" ? "Great shot!" : "Image ready"}
           </p>
           <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc]">
             To get better results make sure to have
           </p>
-          <Guidance className="top-[93.125vh] text-[#fcfcfc]" />
+          <Guidance className="top-[93.125vh] text-[#fcfcfc]" screen={screen} />
           <div className="absolute inset-x-[1.667vw] bottom-[3.75vh] z-20 flex items-center justify-between">
             <button
               type="button"
@@ -344,17 +352,32 @@ export function CameraCapture({
   );
 }
 
-function Guidance({ className }: { className: string }) {
+function Guidance({ className, screen }: { className: string; screen?: CameraCaptureScreen }) {
+  const isReview = screen === "captureReview";
+
   return (
     <div
       className={`absolute left-1/2 z-10 flex -translate-x-1/2 flex-wrap justify-center gap-x-[1.667vw] gap-y-2 px-[1vw] text-[clamp(8px,0.73vw,14px)] uppercase ${className}`}
     >
-      {guidance.map((item) => (
-        <span key={item} className="flex items-center gap-[0.26vw] whitespace-nowrap leading-[1.714]">
-          <span className="size-[clamp(5px,0.417vw,8px)] rotate-45 border border-current" aria-hidden="true" />
-          {item}
-        </span>
-      ))}
+      {guidance.map((item, index) => {
+        const isFilled = isReview && index < 2;
+        const itemOpacity = isReview && index < 2 ? "opacity-50" : "opacity-100";
+
+        return (
+          <span
+            key={item}
+            className={`flex items-center gap-[0.26vw] whitespace-nowrap leading-[1.714] ${itemOpacity}`}
+          >
+            <span
+              className={`size-[clamp(5px,0.417vw,8px)] rotate-45 ${
+                isFilled ? "bg-[#fcfcfc]" : "border border-current"
+              }`}
+              aria-hidden="true"
+            />
+            {item}
+          </span>
+        );
+      })}
     </div>
   );
 }

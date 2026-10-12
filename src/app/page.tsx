@@ -637,16 +637,22 @@ export default function Home() {
                 SKINSTRIC
               </button>
 
-              <div className='opacity-60'>
+              <span className='flex items-center gap-[6px] opacity-60'>
+                <svg aria-hidden='true' className='h-[17px] w-[4px]' viewBox='0 0 4 17' fill='none'>
+                  <path d='M3.5 0.5H0.5V16.5H3.5' stroke='currentColor' />
+                </svg>
                 <span className='text-[clamp(8px,0.73vw,14px)] font-semibold leading-[1.14] tracking-[-0.02em] uppercase'>
-                  [ INTRO ]
+                  Intro
                 </span>
-              </div>
+                <svg aria-hidden='true' className='h-[17px] w-[4px]' viewBox='0 0 4 17' fill='none'>
+                  <path d='M0.5 0.5H3.5V16.5H0.5' stroke='currentColor' />
+                </svg>
+              </span>
             </div>
 
             <button
               type='button'
-              className='absolute right-[0.9375vw] top-[clamp(8px,1.5625vh,15px)] bg-[#1a1b1c] px-[clamp(8px,0.833vw,16px)] py-[clamp(5px,0.833vh,8px)] text-[clamp(7px,0.52vw,10px)] font-semibold leading-4 tracking-[-0.02em] text-[#fcfcfc] uppercase'
+              className='absolute right-[clamp(16px,1.667vw,32px)] top-[clamp(8px,1.5625vh,15px)] bg-[#1a1b1c] px-[clamp(8px,0.833vw,16px)] py-[clamp(5px,0.833vh,8px)] text-[clamp(7px,0.52vw,10px)] font-semibold leading-4 tracking-[-0.02em] text-[#fcfcfc] uppercase'
               style={{
                 fontSize: 'clamp(7px, 0.52vw, 10px)',
                 fontWeight: 600,
@@ -677,10 +683,19 @@ export default function Home() {
             width={604}
             height={604}
             loading='eager'
-            className={`pointer-events-none absolute h-auto transition-[width,top,right] duration-700 ease-in-out ${
-              landingExpanded
-                ? 'right-[-19.84vw] top-[10.31vh] w-[min(39.6875vw,762px)]'
-                : 'right-[-15.68vw] top-[18.65vh] w-[clamp(240px,31.46vw,604px)]'
+            className={`pointer-events-none absolute right-[-15.68vw] top-[18.65vh] h-auto w-[clamp(240px,31.46vw,604px)] transition-opacity duration-700 ease-in-out ${
+              landingExpanded ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+          <Image
+            src='/skinstric/intro-rhombuses.svg'
+            alt=''
+            aria-hidden='true'
+            width={764}
+            height={764}
+            loading='eager'
+            className={`pointer-events-none absolute right-[-19.84vw] top-[10.31vh] h-auto w-[min(39.6875vw,762px)] transition-opacity duration-700 ease-in-out ${
+              landingExpanded ? 'opacity-100' : 'opacity-0'
             }`}
           />
 
