@@ -173,7 +173,7 @@ export function CameraCapture({
                 className="absolute left-1/2 top-[44.17vh] z-10 h-auto w-[min(5.94vw,114px)] -translate-x-1/2"
               />
               <p
-                className="absolute left-1/2 top-[58.96vh] z-10 -translate-x-1/2 whitespace-nowrap text-center text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-[1.714] tracking-[-0.02em]"
+                className="absolute left-1/2 top-[58.96vh] z-10 -translate-x-1/2 whitespace-nowrap text-center text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-[1.714] tracking-[-0.02em] max-md:text-[14px]"
                 role="status"
                 aria-live="polite"
               >
@@ -181,7 +181,7 @@ export function CameraCapture({
               </p>
               {!error && (
                 <>
-                  <p className="absolute left-1/2 top-[75.6vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714]">
+                  <p className="absolute left-1/2 top-[75.6vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] max-md:w-[90vw] max-md:text-[12px]">
                     To get better results make sure to have
                   </p>
                   <Guidance className="top-[79.8vh] text-[#1a1b1c]" />
@@ -276,15 +276,15 @@ export function CameraCapture({
               {error}
             </p>
           )}
-          <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc]">
+          <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc] max-md:top-[84vh] max-md:w-[90vw] max-md:text-[12px]">
             To get better results make sure to have
           </p>
-          <Guidance className="top-[93.125vh] text-[#fcfcfc]" screen={screen} />
+          <Guidance className="top-[93.125vh] max-md:top-[88vh] text-[#fcfcfc]" screen={screen} />
           <div className="absolute inset-x-[1.667vw] bottom-[3.75vh] z-20 flex items-end justify-between gap-[1vw]">
             <button
               type="button"
               onClick={onBack}
-              className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70"
+              className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70 max-md:gap-2 max-md:text-[13px]"
             >
               <span className="size-[clamp(22px,2.292vw,44px)]">
                 <DiamondControl direction="left" tone="light" />
@@ -300,10 +300,10 @@ export function CameraCapture({
                 onStartCountdown();
               }}
               disabled={!cameraReady}
-              className="absolute right-[1.667vw] top-[46.77vh] z-20 flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+              className="absolute right-[1.667vw] top-[46.77vh] z-20 flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-80 disabled:cursor-not-allowed disabled:opacity-40 max-md:right-4 max-md:top-[auto] max-md:bottom-[18vh] max-md:gap-2 max-md:text-[13px]"
             >
               Take picture
-              <span className="grid size-[clamp(32px,3.23vw,62px)] place-items-center rounded-full bg-[#fcfcfc] text-[#1a1b1c] shadow-sm">
+              <span className="grid size-[clamp(32px,3.23vw,62px)] place-items-center rounded-full bg-[#fcfcfc] text-[#1a1b1c] shadow-sm max-md:size-14">
                 <FiCamera className="size-[clamp(16px,1.4vw,27px)]" aria-hidden="true" />
               </span>
             </button>
@@ -320,11 +320,11 @@ export function CameraCapture({
           >
             {source === "camera" ? "Great shot!" : "Image ready"}
           </p>
-          <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc]">
+          <p className="absolute left-1/2 top-[88.96vh] z-10 -translate-x-1/2 text-center text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] text-[#fcfcfc] max-md:top-[84vh] max-md:w-[90vw] max-md:text-[12px]">
             To get better results make sure to have
           </p>
-          <Guidance className="top-[93.125vh] text-[#fcfcfc]" screen={screen} />
-          <div className="absolute inset-x-[1.667vw] bottom-[3.75vh] z-20 flex items-center justify-between">
+          <Guidance className="top-[93.125vh] max-md:top-[88vh] text-[#fcfcfc]" screen={screen} />
+          <div className="absolute inset-x-[1.667vw] bottom-[3.75vh] z-20 flex items-center justify-between max-md:inset-x-4">
             <button
               type="button"
               onClick={onRetake}
@@ -357,7 +357,7 @@ function Guidance({ className, screen }: { className: string; screen?: CameraCap
 
   return (
     <div
-      className={`absolute left-1/2 z-10 flex -translate-x-1/2 flex-wrap justify-center gap-x-[1.667vw] gap-y-2 px-[1vw] text-[clamp(8px,0.73vw,14px)] uppercase ${className}`}
+      className={`absolute left-1/2 z-10 flex -translate-x-1/2 flex-wrap justify-center gap-x-[1.667vw] gap-y-2 px-[1vw] text-[clamp(8px,0.73vw,14px)] uppercase max-md:w-[92vw] max-md:gap-x-4 max-md:text-[11px] ${className}`}
     >
       {guidance.map((item, index) => {
         const isFilled = isReview && index < 2;

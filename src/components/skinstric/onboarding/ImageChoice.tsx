@@ -53,13 +53,13 @@ export function ImageChoice({
         Back
       </button>
 
-      <section className="absolute left-1/2 top-[25%] z-10 grid w-[74.7vw] -translate-x-1/2 grid-cols-2 gap-[24.58vw]">
+      <section className="absolute left-1/2 top-[25%] z-10 grid w-[74.7vw] -translate-x-1/2 grid-cols-2 gap-[18.7vw] max-md:top-[11%] max-md:w-[min(72vw,34vh,320px)] max-md:grid-cols-1 max-md:gap-6">
         <button
           type="button"
           onClick={onTakePicture}
           disabled={loading}
           aria-label="Allow A.I. to scan your face"
-          className="group relative aspect-square w-[25.1vw] disabled:cursor-not-allowed"
+          className="group relative aspect-square w-[28vw] disabled:cursor-not-allowed max-md:w-full"
         >
           <Image
             src="/skinstric/camera-choice-rhombuses.svg"
@@ -93,7 +93,7 @@ export function ImageChoice({
             height={59}
             className="absolute left-[58.3%] top-[29.6%] h-auto w-[3.44vw]"
           />
-          <span className="absolute left-[73.2%] top-[26.1%] w-[8.7vw] text-left text-[clamp(7px,0.73vw,14px)] uppercase leading-[clamp(11px,1.25vw,24px)]">
+          <span className="absolute left-[73.2%] top-[26.1%] w-[8.7vw] text-left text-[clamp(7px,0.73vw,14px)] uppercase leading-[clamp(11px,1.25vw,24px)] max-md:w-[28%] max-md:text-[11px] max-md:leading-4">
             Allow A.I.
             <br />
             to Scan Your Face
@@ -105,7 +105,7 @@ export function ImageChoice({
           onClick={() => fileInputRef.current?.click()}
           disabled={loading}
           aria-label="Allow A.I. to access gallery"
-          className="group relative aspect-square w-[25.1vw] disabled:cursor-not-allowed"
+          className="group relative aspect-square w-[28vw] disabled:cursor-not-allowed max-md:w-full"
         >
           <Image
             src="/skinstric/camera-choice-rhombuses.svg"
@@ -139,7 +139,7 @@ export function ImageChoice({
             height={59}
             className="absolute left-[29.8%] top-[58.3%] h-auto w-[3.44vw]"
           />
-          <span className="absolute left-0 top-[67.6%] w-[28.2%] text-right text-[clamp(7px,0.73vw,14px)] uppercase leading-[clamp(11px,1.25vw,24px)]">
+          <span className="absolute left-0 top-[67.6%] w-[28.2%] text-right text-[clamp(7px,0.73vw,14px)] uppercase leading-[clamp(11px,1.25vw,24px)] max-md:text-[11px] max-md:leading-4">
             Allow A.I.
             <br />
             access Gallery

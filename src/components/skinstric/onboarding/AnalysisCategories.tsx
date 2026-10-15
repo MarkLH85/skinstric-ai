@@ -61,13 +61,13 @@ export function AnalysisCategories({
       <p className="absolute left-[1.667vw] top-[8.96vh] z-10 text-[clamp(9px,0.833vw,16px)] font-semibold uppercase leading-[1.5] tracking-[-0.02em]">
         A. I. Analysis
       </p>
-      <p className="absolute left-[1.667vw] top-[12.3vh] z-10 max-w-[336px] text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714]">
+      <p className="absolute left-[1.667vw] top-[12.3vh] z-10 max-w-[336px] text-[clamp(8px,0.73vw,14px)] uppercase leading-[1.714] max-md:max-w-[80vw] max-md:text-[12px]">
         A. I. has estimated the following.
         <br />
         Fix estimated information if needed.
       </p>
 
-      <div className="absolute left-1/2 top-1/2 z-0 size-[min(39.6875vw,79.375vh)] -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-1/2 z-0 size-[min(39.6875vw,79.375vh)] -translate-x-1/2 -translate-y-1/2 max-md:size-[min(100vw,62vh)]">
         <Image
           src="/skinstric/intro-rhombuses.svg"
           alt=""
@@ -97,7 +97,7 @@ export function AnalysisCategories({
                   aria-label={category.label}
                 />
                 <p
-                  className={`pointer-events-none absolute ${category.position} -translate-x-1/2 -translate-y-1/2 text-center text-[clamp(8px,0.833vw,16px)] font-semibold uppercase leading-[1.5] tracking-[-0.02em] text-[#1a1b1c] ${category.width}`}
+                  className={`pointer-events-none absolute ${category.position} -translate-x-1/2 -translate-y-1/2 text-center text-[clamp(8px,0.833vw,16px)] font-semibold uppercase leading-[1.5] tracking-[-0.02em] text-[#1a1b1c] max-md:text-[10px] max-md:leading-[1.3] ${category.width}`}
                 >
                   {category.label === "Skin Type Details" ? (
                     <>

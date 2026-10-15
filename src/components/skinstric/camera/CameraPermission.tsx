@@ -33,7 +33,7 @@ export function CameraPermission({ onBack, onAllow }: CameraPermissionProps) {
         To start analysis
       </p>
 
-      <div className="absolute left-[12.5vw] top-[25%] size-[25.1vw] opacity-100" aria-hidden="true">
+      <div className="absolute left-[12.5vw] top-[25%] size-[25.1vw] opacity-100 max-md:hidden" aria-hidden="true">
         <Image
           src="/skinstric/camera-choice-rhombuses.svg"
           alt=""
@@ -69,7 +69,7 @@ export function CameraPermission({ onBack, onAllow }: CameraPermissionProps) {
         </span>
       </div>
 
-      <div className="absolute right-[12.5vw] top-[25%] size-[25.1vw] opacity-25" aria-hidden="true">
+      <div className="absolute right-[12.5vw] top-[25%] size-[25.1vw] opacity-25 max-md:hidden" aria-hidden="true">
         <Image
           src="/skinstric/camera-choice-rhombuses.svg"
           alt=""
@@ -109,11 +109,11 @@ export function CameraPermission({ onBack, onAllow }: CameraPermissionProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="camera-permission-title"
-        className="absolute left-[30.8vw] top-[calc(25vh+10.6vw)] z-20 flex h-[clamp(100px,14.17vh,136px)] w-[min(18.3vw,352px)] min-w-[280px] flex-col bg-[#1a1b1c] text-[#fcfcfc]"
+        className="absolute left-[30.8vw] top-[calc(25vh+10.6vw)] z-20 flex h-[clamp(100px,14.17vh,136px)] w-[min(18.3vw,352px)] min-w-[280px] flex-col bg-[#1a1b1c] text-[#fcfcfc] max-md:left-1/2 max-md:top-1/2 max-md:h-36 max-md:w-[min(86vw,360px)] max-md:min-w-0 max-md:-translate-x-1/2 max-md:-translate-y-1/2"
       >
         <h1
           id="camera-permission-title"
-          className="flex-1 px-[clamp(12px,0.833vw,16px)] pt-[clamp(16px,1.25vw,24px)] text-[clamp(9px,0.625vw,12px)] font-medium uppercase leading-[1.5]"
+          className="flex-1 px-[clamp(12px,0.833vw,16px)] pt-[clamp(16px,1.25vw,24px)] text-[clamp(9px,0.625vw,12px)] font-medium uppercase leading-[1.5] max-md:text-[13px]"
         >
           Allow A.I. to access your camera
         </h1>
@@ -121,14 +121,14 @@ export function CameraPermission({ onBack, onAllow }: CameraPermissionProps) {
           <button
             type="button"
             onClick={onBack}
-            className="text-[clamp(8px,0.52vw,10px)] uppercase opacity-70 hover:opacity-100"
+            className="text-[clamp(8px,0.52vw,10px)] uppercase opacity-70 hover:opacity-100 max-md:text-[12px]"
           >
             Deny
           </button>
           <button
             type="button"
             onClick={onAllow}
-            className="text-[clamp(8px,0.52vw,10px)] uppercase hover:opacity-75"
+            className="text-[clamp(8px,0.52vw,10px)] uppercase hover:opacity-75 max-md:text-[12px]"
           >
             Allow
           </button>

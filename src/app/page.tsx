@@ -652,7 +652,7 @@ export default function Home() {
 
             <button
               type='button'
-              className='absolute right-[clamp(16px,1.667vw,32px)] top-[clamp(8px,1.5625vh,15px)] bg-[#1a1b1c] px-[clamp(8px,0.833vw,16px)] py-[clamp(5px,0.833vh,8px)] text-[clamp(7px,0.52vw,10px)] font-semibold leading-4 tracking-[-0.02em] text-[#fcfcfc] uppercase'
+              className='absolute right-[clamp(16px,1.667vw,32px)] top-[clamp(8px,1.5625vh,15px)] bg-[#1a1b1c] px-[clamp(8px,0.833vw,16px)] py-[clamp(5px,0.833vh,8px)] text-[clamp(7px,0.52vw,10px)] font-semibold leading-4 tracking-[-0.02em] text-[#fcfcfc] uppercase max-md:text-[10px]'
               style={{
                 fontSize: 'clamp(7px, 0.52vw, 10px)',
                 fontWeight: 600,
@@ -672,7 +672,7 @@ export default function Home() {
             loading='eager'
             className={`pointer-events-none absolute top-[18.65vh] h-auto w-[clamp(240px,31.46vw,604px)] transition-[opacity,translate] duration-700 ease-in-out ${
               landingExpanded
-                ? 'left-[-40vw] opacity-0'
+                ? 'left-[-40vw] opacity-0 max-md:left-[-15.68vw] max-md:opacity-100'
                 : 'left-[-15.68vw] opacity-100'
             }`}
           />
@@ -684,7 +684,7 @@ export default function Home() {
             height={604}
             loading='eager'
             className={`pointer-events-none absolute right-[-15.68vw] top-[18.65vh] h-auto w-[clamp(240px,31.46vw,604px)] transition-opacity duration-700 ease-in-out ${
-              landingExpanded ? 'opacity-0' : 'opacity-100'
+              landingExpanded ? 'opacity-0 max-md:opacity-100' : 'opacity-100'
             }`}
           />
           <Image
@@ -695,15 +695,15 @@ export default function Home() {
             height={764}
             loading='eager'
             className={`pointer-events-none absolute right-[-19.84vw] top-[10.31vh] h-auto w-[min(39.6875vw,762px)] transition-opacity duration-700 ease-in-out ${
-              landingExpanded ? 'opacity-100' : 'opacity-0'
+              landingExpanded ? 'opacity-100 max-md:opacity-0' : 'opacity-0'
             }`}
           />
 
           <h1
-            className={`absolute z-10 whitespace-nowrap text-[clamp(40px,6.667vw,128px)] font-light leading-[clamp(40px,6.25vw,120px)] tracking-[-0.07em] transition-[left,top,translate] duration-700 ease-in-out ${
+            className={`absolute z-10 whitespace-nowrap text-[clamp(40px,6.667vw,128px)] font-light leading-[clamp(40px,6.25vw,120px)] tracking-[-0.07em] max-md:text-[clamp(44px,15vw,80px)] max-md:leading-[clamp(44px,14vw,76px)] transition-[left,top,translate] duration-700 ease-in-out ${
               landingExpanded
-                ? 'left-[clamp(24px,1.667vw,32px)] top-[37.6vh] translate-x-0 text-left'
-                : 'left-1/2 top-[37.6vh] -translate-x-1/2 text-center'
+                ? 'left-[clamp(24px,1.667vw,32px)] top-[37.6vh] translate-x-0 text-left max-md:left-1/2 max-md:top-[30vh] max-md:-translate-x-1/2 max-md:text-center'
+                : 'left-1/2 top-[37.6vh] -translate-x-1/2 text-center max-md:top-[30vh]'
             }`}
           >
             Sophisticated
@@ -718,7 +718,7 @@ export default function Home() {
               setStarted(true);
             }}
             className={`group absolute left-[clamp(12px,1.667vw,32px)] top-[47.7083vh] z-20 flex items-center gap-[clamp(8px,0.833vw,16px)] transition-opacity duration-700 ease-in-out ${
-              landingExpanded ? 'pointer-events-none opacity-0' : 'opacity-100'
+              landingExpanded ? 'pointer-events-none opacity-0 max-md:pointer-events-auto max-md:opacity-100' : 'opacity-100'
             }`}
           >
             <span className='relative size-[clamp(28px,2.292vw,44px)] shrink-0 opacity-70 transition-transform duration-300 group-hover:rotate-90'>
@@ -742,7 +742,7 @@ export default function Home() {
                 style={{ height: 'auto' }}
               />
             </span>
-            <span className='text-[clamp(9px,0.73vw,14px)] font-semibold leading-4 tracking-[-0.02em] uppercase opacity-70'>
+            <span className='text-[clamp(9px,0.73vw,14px)] font-semibold leading-4 tracking-[-0.02em] uppercase opacity-70 max-md:text-[13px]'>
               Discover A.I.
             </span>
           </button>
@@ -759,17 +759,17 @@ export default function Home() {
             onBlur={() => setLandingExpanded(false)}
             className={`group absolute right-[clamp(18px,1.667vw,32px)] z-20 flex w-max items-center ${
               landingExpanded
-                ? 'top-[45.9375vh] gap-[clamp(8px,1.25vw,24px)]'
+                ? 'top-[45.9375vh] gap-[clamp(8px,1.25vw,24px)] max-md:top-[47.7083vh] max-md:gap-[clamp(8px,0.833vw,16px)]'
                 : 'top-[47.7083vh] gap-[clamp(8px,0.833vw,16px)]'
             }`}
           >
-            <span className='shrink-0 whitespace-nowrap text-right text-[clamp(9px,0.73vw,14px)] font-semibold leading-4 tracking-[-0.02em] uppercase opacity-70'>
+            <span className='shrink-0 whitespace-nowrap text-right text-[clamp(9px,0.73vw,14px)] font-semibold leading-4 tracking-[-0.02em] uppercase opacity-70 max-md:text-[13px]'>
               Take test
             </span>
             <span
               className={`relative shrink-0 opacity-70 transition-[width,height,transform] duration-300 group-hover:rotate-90 ${
                 landingExpanded
-                  ? 'size-[clamp(28px,4.0625vw,78px)]'
+                  ? 'size-[clamp(28px,4.0625vw,78px)] max-md:size-[clamp(28px,2.292vw,44px)]'
                   : 'size-[clamp(28px,2.292vw,44px)]'
               }`}
             >
@@ -795,7 +795,7 @@ export default function Home() {
             </span>
           </button>
 
-          <p className='absolute left-[clamp(16px,1.667vw,32px)] top-[89.8vh] z-20 w-max whitespace-nowrap text-[clamp(8px,0.73vw,14px)] font-normal leading-[1.714] uppercase'>
+          <p className='absolute left-[clamp(16px,1.667vw,32px)] top-[89.8vh] z-20 w-max whitespace-nowrap text-[clamp(8px,0.73vw,14px)] font-normal leading-[1.714] uppercase max-md:text-[11px]'>
             Skinstric developed an A.I. that creates
             <br />
             a highly-personalised routine tailored to

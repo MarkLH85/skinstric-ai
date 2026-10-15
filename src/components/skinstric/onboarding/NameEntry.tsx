@@ -44,8 +44,8 @@ export function NameEntry({
       data-figma-screen={step === "location" ? (location ? "505" : "504") : "003"}
       className="relative min-h-screen overflow-hidden bg-[#fcfcfc] text-[#1a1b1c]"
     >
-      <header className="absolute inset-x-0 top-0 z-10 flex h-[3.333vw] items-center px-[1.667vw]">
-        <div className={`flex items-center ${step === "location" ? "gap-3" : "gap-[1vw]"} text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-[1.14] tracking-[-0.02em]`}>
+      <header className="absolute inset-x-0 top-0 z-10 flex h-[3.333vw] items-center px-[1.667vw] max-md:h-12">
+        <div className={`flex items-center ${step === "location" ? "gap-3" : "gap-[1vw]"} text-[clamp(8px,0.73vw,14px)] max-md:text-[11px] font-semibold uppercase leading-[1.14] tracking-[-0.02em]`}>
           <span>SKINSTRIC</span>
           {step === "location" ? (
             <span className="flex items-center gap-[6px] opacity-60">
@@ -63,7 +63,7 @@ export function NameEntry({
         </div>
       </header>
 
-      <p className="absolute left-[1.667vw] top-[8.96vh] z-10 text-[clamp(9px,0.833vw,16px)] font-semibold uppercase leading-[1.5] tracking-[-0.02em]">
+      <p className="absolute left-[1.667vw] top-[8.96vh] z-10 text-[clamp(9px,0.833vw,16px)] font-semibold uppercase leading-[1.5] tracking-[-0.02em] max-md:text-[13px]">
         To start analysis
       </p>
 
@@ -73,20 +73,20 @@ export function NameEntry({
         aria-hidden="true"
         width={740}
         height={740}
-        className="pointer-events-none absolute left-1/2 top-[10.3vh] z-0 h-auto w-[min(39.6875vw,762px)] -translate-x-1/2"
+        className="pointer-events-none absolute left-1/2 top-[10.3vh] z-0 h-auto w-[min(39.6875vw,762px)] -translate-x-1/2 max-md:top-[48.7vh] max-md:w-[min(92vw,70vh)] max-md:-translate-y-1/2 max-md:opacity-100 max-md:brightness-50 max-md:contrast-200"
       />
 
       <section className="absolute inset-x-4 top-[48.7vh] z-10 mx-auto flex max-w-[calc(100vw-32px)] -translate-y-1/2 flex-col items-center">
         <label
           htmlFor="onboarding-answer"
-          className="mb-[2px] text-center text-[clamp(8px,0.73vw,14px)] leading-[clamp(8px,1.25vw,24px)] uppercase opacity-40"
+          className="mb-[2px] text-center text-[clamp(8px,0.73vw,14px)] leading-[clamp(8px,1.25vw,24px)] uppercase opacity-40 max-md:text-[14px] max-md:leading-5"
         >
           {value ? prompt : "Click to type"}
         </label>
-        <div className="grid w-[clamp(220px,25.05vw,481px)] max-w-[calc(100vw-32px)]">
+        <div className="grid w-[clamp(220px,25.05vw,481px)] max-w-[calc(100vw-32px)] max-md:w-[min(88vw,420px)]">
           <span
             aria-hidden="true"
-            className={`invisible col-start-1 row-start-1 max-w-full whitespace-pre text-[clamp(24px,3.125vw,60px)] font-normal leading-[clamp(27px,3.333vw,64px)] tracking-[-0.07em] ${
+            className={`invisible col-start-1 row-start-1 max-w-full whitespace-pre text-[clamp(24px,3.125vw,60px)] font-normal leading-[clamp(27px,3.333vw,64px)] tracking-[-0.07em] max-md:text-[clamp(32px,10vw,48px)] max-md:leading-[1.1] ${
               fitUnderline
                 ? "relative w-max justify-self-center after:visible after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#1a1b1c] after:content-['']"
                 : ""
@@ -111,7 +111,7 @@ export function NameEntry({
             aria-label={prompt}
             className={`col-start-1 row-start-1 w-full min-w-0 ${
               fitUnderline ? "border-b border-transparent" : "border-b border-[#1a1b1c]"
-            } bg-transparent text-center text-[clamp(24px,3.125vw,60px)] font-normal leading-[clamp(27px,3.333vw,64px)] tracking-[-0.07em] outline-none placeholder:text-[#1a1b1c] placeholder:opacity-100`}
+            } bg-transparent text-center text-[clamp(24px,3.125vw,60px)] font-normal leading-[clamp(27px,3.333vw,64px)] tracking-[-0.07em] outline-none max-md:text-[clamp(32px,10vw,48px)] max-md:leading-[1.1] placeholder:text-[#1a1b1c] placeholder:opacity-100`}
           />
         </div>
         {error && (
@@ -125,7 +125,7 @@ export function NameEntry({
         <button
           type="button"
           onClick={onBack}
-          className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70"
+          className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70 max-md:text-[13px]"
         >
           {step === "location" ? (
             <DiamondArrow direction="left" />
@@ -142,7 +142,7 @@ export function NameEntry({
             type="button"
             onClick={onContinue}
             disabled={loading}
-            className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex items-center gap-[0.833vw] text-[clamp(8px,0.73vw,14px)] font-semibold uppercase leading-4 tracking-[-0.02em] opacity-70 max-md:text-[13px] disabled:cursor-not-allowed disabled:opacity-30"
           >
             {loading ? "Processing..." : "Proceed"}
             {step === "location" ? (
